@@ -1,0 +1,9 @@
+body{
+    background-color: black;
+    color: white;
+    font-family: IBM BIOS;
+}
+@font-face {
+    font-family:IBM BIOS ;
+    src: url(./Web437_IBM_EGA_8x8.woff);
+}
