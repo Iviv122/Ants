@@ -25,7 +25,7 @@ export class Display {
         this.display = display
         this.matrix = new Array(this.width * this.height)
 
-        this.InitMatrix()
+        this.Reset()
 
     }
 
@@ -68,7 +68,7 @@ export class Display {
         this.display.textContent = string;
     }
 
-    InitMatrix() {
+    Reset() {
         for (let i = 0; i < this.height; i++) {
             for (let j = 0; j < this.width; j++) {
                 this.matrix[i * this.width + j] = false
