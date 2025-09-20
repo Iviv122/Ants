@@ -3,27 +3,33 @@ import { Ant } from "./classes/ant.js";
 import { Pen } from "./classes/pen.js"
 
 var speed = 10
+var iterations = 0
+var ittext = document.getElementById("iterations")
+
 const cavnas = document.getElementById("canvas")
+const ctx = cavnas.getContext("2d")
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
-const ctx = cavnas.getContext("2d")
 const footer = document.getElementById("footer")
+const display = new Display(ctx);
 
-var display = new Display(ctx);
-
-console.log(display.width,display.height)
+console.log(display.width, display.height)
 
 var ants = []
 ants.push(new Ant(display, 35, 15))
 
-var pen = new Pen(display, ants,footer)
+var pen = new Pen(display, ants, footer)
 
 Draw()
 
 function Draw() {
-    ants.forEach((a) => { a.Move() })
+    if (ants.length > 0) {
+        iterations += 1
+        ittext.textContent = "iterations: " + iterations.toString()
+
+        ants.forEach((a) => { a.Move() })
+    }
 
     display.PrintMatrix()
     return setTimeout(() => {
@@ -56,6 +62,10 @@ window.RemoveAnts = RemoveAnts;
 function HardReset() {
     pen.mode = 0
     ants.length = 0
+
+    iterations = 0
+    ittext.textContent = "" 
+
     display.Reset()
 }
 window.HardReset = HardReset;

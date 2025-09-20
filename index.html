@@ -13,7 +13,7 @@
     <canvas class="unselectable" id="canvas" style="border: 1px solid white; image-rendering: pixelated;">
 
     </canvas>
-    
+
     <footer id="footer">
         <input title="Speed" id="range" type="range" min="1" value="10" max="500" onchange="SetSpeed(this.value)">
         <button title="Do nothing on click" onclick="DoNothing()">
@@ -35,6 +35,12 @@ Right mouse switch to zero" onclick="Fill()">
         <button title="Hard Reset" onclick="HardReset()">
             <img src="./assets/hardreset.svg" width="100" height="100">
         </button>
+        <div style="display: flex;justify-content: center; align-items: center; flex-direction: column;" >
+            <p id="iterations">
+                sample text
+            </p> 
+        </div>
+
     </footer>
 
 </body>
