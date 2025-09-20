@@ -16,12 +16,18 @@ body {
     text-align: center;
     white-space: pre;
 }
-footer{
-    position: sticky;
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
     display: flex;
-    justify-content:center;
-    gap: 15px; 
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    z-index: 1000;
 }
+
 @font-face {
     font-family: IBM BIOS;
     src: url(./assets/Web437_IBM_EGA_8x8.woff);

@@ -17,8 +17,8 @@ export class Display {
         this.screenWidth = document.documentElement.clientWidth
         this.screenHeight = document.documentElement.clientHeight
 
-        this.width = Math.floor((this.screenWidth - 100) / this.FontSize)
-        this.height = Math.floor((this.screenHeight - 100) / this.FontSize / this.GetFontWidthRatio())
+        this.width = Math.floor(this.screenWidth / this.FontSize)
+        this.height = Math.floor(this.screenHeight / this.FontSize / this.GetFontWidthRatio())
 
         display.style.fontSize = this.FontSize + "px"
 
@@ -29,6 +29,9 @@ export class Display {
 
     }
 
+    SetValue(x, y,val) {
+        this.matrix[y * this.width + x] = val 
+    }
     FlipValue(x, y) {
         this.matrix[y * this.width + x] = !this.matrix[y * this.width + x]
     }
