@@ -1,36 +1,33 @@
 export class Display {
 
-
     screenWidth = 0;
     screenHeight = 0;
 
-    FontSize = 8;
+    PixelSize = 4;
 
     width = 0;
     height = 0;
 
     matrix;
-    display;
+    ctx;
 
-    constructor(display) {
+    constructor(ctx) {
 
         this.screenWidth = document.documentElement.clientWidth
         this.screenHeight = document.documentElement.clientHeight
 
-        this.width = Math.floor(this.screenWidth / this.FontSize)
-        this.height = Math.floor(this.screenHeight / this.FontSize / this.GetFontWidthRatio())
+        this.width = Math.floor(this.screenWidth / this.PixelSize)
+        this.height = Math.floor(this.screenHeight / this.PixelSize)
 
-        display.style.fontSize = this.FontSize + "px"
-
-        this.display = display
+        this.ctx = ctx
+        ctx.fillStyle = "green";
         this.matrix = new Array(this.width * this.height)
 
         this.Reset()
 
     }
-
-    SetValue(x, y,val) {
-        this.matrix[y * this.width + x] = val 
+    SetValue(x, y, val) {
+        this.matrix[y * this.width + x] = val
     }
     FlipValue(x, y) {
         this.matrix[y * this.width + x] = !this.matrix[y * this.width + x]
@@ -38,37 +35,17 @@ export class Display {
     GetValue(x, y) {
         return this.matrix[y * this.width + x]
     }
-
-    GetFontWidthRatio() {
-        const span = document.createElement('span');
-        span.style.position = 'absolute';
-        span.style.visibility = 'hidden';
-        span.style.whiteSpace = 'nowrap';
-        span.style.fontSize = this.FontSize + "px";
-        span.textContent = "0";
-
-        document.body.appendChild(span);
-
-        const width = span.offsetWidth;
-        const height = span.offsetHeight;
-
-        document.body.removeChild(span);
-
-        const aspectRatio = height / width;
-        return aspectRatio;
-    }
     PrintMatrix() {
-        let string = "";
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
-                string += this.GetValue(x, y) ? "1" : "0";
+                this.ctx.fillStyle = this.GetValue(x,y) ? "white" : "black";
+                this.ctx.fillRect(x*this.PixelSize,y*this.PixelSize,this.PixelSize,this.PixelSize) 
             }
-            string += "\n";
         }
-        this.display.textContent = string;
     }
 
     Reset() {
+        this.ctx.clearRect(0,0,this.screenWidth,this.screenHeight);
         for (let i = 0; i < this.height; i++) {
             for (let j = 0; j < this.width; j++) {
                 this.matrix[i * this.width + j] = false

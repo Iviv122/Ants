@@ -4,13 +4,12 @@ import { Ant } from "./ant.js";
 let modes = [
     { "left": () => { console.log("Left Works") }, "right": () => { console.log("Right Works") } }, // Nothing 
     { "left": (x, y, display) => { display.SetValue(x, y, 1) }, "right": (x, y, display) => { display.SetValue(x, y, 0) } }, // Place ants
-    { "left": (x, y, display, antlist) => { antlist.push(new Ant(display, x, y)) }, "right": (x, y, display, antlist) => { } } // Switch points
+    { "left": (x, y, display, antlist) => { antlist.push(new Ant(display, x, y)) }, "right": () => { } } // Switch points
 ]
 
 export class Pen {
     mode = 0
-    fontSize = 0
-    ratio = 0
+    PixelSize = 0
 
     isHolding = false
     button = - 1
@@ -18,13 +17,11 @@ export class Pen {
     antlist
 
     constructor(display, antlist, footer) {
-        this.fontSize = display.FontSize
-        this.ratio = display.GetFontWidthRatio()
+        this.PixelSize = display.PixelSize
         this.display = display
         this.antlist = antlist
 
-        console.log(this.fontSize);
-        console.log(this.ratio);
+        console.log(this.PixelSize);
 
         addEventListener("mousedown", (e) => {
             if (!footer.contains(e.target)) {
@@ -49,8 +46,11 @@ export class Pen {
     }
     click(e) {
         if (this.isHolding) {
-            let x = Math.floor(e.clientX / this.fontSize)
-            let y = Math.floor(e.clientY / this.fontSize / this.ratio)
+            let x = Math.floor(e.clientX / this.PixelSize)
+            let y = Math.floor(e.clientY / this.PixelSize)
+
+            console.log(e.clientX,e.clientY)
+            console.log(x,y)
 
             if (this.button == 0) { // left mouse click
                 modes[this.mode].left(x, y, this.display, this.antlist)

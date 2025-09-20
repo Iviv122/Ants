@@ -3,14 +3,20 @@ import { Ant } from "./classes/ant.js";
 import { Pen } from "./classes/pen.js"
 
 var speed = 10
-var target = document.getElementById("display")
-var footer = document.getElementById("footer")
+const cavnas = document.getElementById("canvas")
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-var display = new Display(target);
-console.log(display.width, display.height)
+
+const ctx = cavnas.getContext("2d")
+const footer = document.getElementById("footer")
+
+var display = new Display(ctx);
+
+console.log(display.width,display.height)
 
 var ants = []
-ants.push(new Ant(display, 100, 40))
+ants.push(new Ant(display, 35, 15))
 
 var pen = new Pen(display, ants,footer)
 
@@ -20,9 +26,9 @@ function Draw() {
     ants.forEach((a) => { a.Move() })
 
     display.PrintMatrix()
-        return setTimeout(() => {
-            Draw()
-        }, speed);
+    return setTimeout(() => {
+        Draw()
+    }, speed);
 
 }
 function DoNothing() {
