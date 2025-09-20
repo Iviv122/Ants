@@ -4,6 +4,7 @@ import { Pen } from "./classes/pen.js"
 
 var speed = 10
 var target = document.getElementById("display")
+var footer = document.getElementById("footer")
 
 var display = new Display(target);
 console.log(display.width, display.height)
@@ -11,9 +12,9 @@ console.log(display.width, display.height)
 var ants = []
 ants.push(new Ant(display, 100, 40))
 
-var pen = new Pen(display, ants)
+var pen = new Pen(display, ants,footer)
 
-var routine = Draw()
+Draw()
 
 function Draw() {
     ants.forEach((a) => { a.Move() })
@@ -49,6 +50,7 @@ window.RemoveAnts = RemoveAnts;
 function HardReset() {
     pen.mode = 0
     ants.length = 0
+    display.Reset()
 }
 window.HardReset = HardReset;
 function SetSpeed(value) {
