@@ -17,7 +17,7 @@ const display = new Display(ctx);
 console.log(display.width, display.height)
 
 var ants = []
-ants.push(new Ant(display, 35, 15))
+ants.push(new Ant(display, Math.floor(display.width/2), Math.floor(display.height/2)))
 
 var pen = new Pen(display, ants, footer)
 
