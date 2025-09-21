@@ -4,7 +4,7 @@ import { Ant } from "./ant.js";
 let modes = [
     { "left": () => { }, "right": () => { } }, // Nothing 
     { "left": (x, y, display) => { display.SetValue(x, y, 1) }, "right": (x, y, display) => { display.SetValue(x, y, 0) } }, // Place ants
-    { "left": (x, y, display, antlist) => { antlist.push(new Ant(display, x, y)) }, "right": () => { } } // Switch points
+    { "left": (x, y, display, antlist,name) => { antlist.push(new Ant(display,name, x, y)) }, "right": () => { } } // Switch points
 ]
 
 export class Pen {
@@ -15,12 +15,13 @@ export class Pen {
     button = - 1
     display
     antlist
+    namegiver
 
-    constructor(display, antlist, footer) {
+    constructor(display, antlist, footer,namegiver) {
         this.PixelSize = display.PixelSize
         this.display = display
         this.antlist = antlist
-
+        this.namegiver = namegiver
 
         addEventListener("mousedown", (e) => {
             if (!footer.contains(e.target)) {
@@ -49,10 +50,10 @@ export class Pen {
             let y = Math.floor(e.clientY / this.PixelSize)
 
             if (this.button == 0) { // left mouse click
-                modes[this.mode].left(x, y, this.display, this.antlist)
+                modes[this.mode].left(x, y, this.display, this.antlist,this.namegiver.value)
             }
             if (this.button == 2) { // right mouse click
-                modes[this.mode].right(x, y, this.display, this.antlist)
+                modes[this.mode].right(x, y, this.display, this.antlist,this.namegiver.value)
             }
         }
     }

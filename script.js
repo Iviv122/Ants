@@ -12,14 +12,14 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const footer = document.getElementById("footer")
+const namegiver = document.getElementById("AntName")
 const display = new Display(ctx);
 
-console.log(display.width, display.height)
 
 var ants = []
-ants.push(new Ant(display, Math.floor(display.width/2), Math.floor(display.height/2)))
+ants.push(new Ant(display,"RL", Math.floor(display.width/2), Math.floor(display.height/2)))
 
-var pen = new Pen(display, ants, footer)
+var pen = new Pen(display, ants, footer,namegiver)
 
 Draw()
 

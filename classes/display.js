@@ -20,31 +20,25 @@ export class Display {
         this.height = Math.floor(this.screenHeight / this.PixelSize)
 
         this.ctx = ctx
-        this.matrix = new Array(this.width * this.height)
+        this.matrix = new Map()
 
         this.Reset()
 
     }
-    SetValue(x, y, val) {
-        this.matrix[y * this.width + x] = val
-        this.ctx.fillStyle = this.GetValue(x,y) ? "#FFFFFF" : "#000000";
-        this.ctx.fillRect(x*this.PixelSize,y*this.PixelSize,this.PixelSize,this.PixelSize) 
+    SetValue(x, y, val, color) {
+        const key = `${x},${y}`;
+        this.matrix.set(key, val);
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(x * this.PixelSize, y * this.PixelSize, this.PixelSize, this.PixelSize);
     }
-    FlipValue(x, y) {
-        this.matrix[y * this.width + x] = !this.matrix[y * this.width + x]
-        this.ctx.fillStyle = this.GetValue(x,y) ? "#FFFFFF" : "#000000";
-        this.ctx.fillRect(x*this.PixelSize,y*this.PixelSize,this.PixelSize,this.PixelSize) 
-    }
+
     GetValue(x, y) {
-        return this.matrix[y * this.width + x]
+        const key = `${x},${y}`;
+        return this.matrix.get(key) !== undefined ? this.matrix.get(key) : 0;
     }
 
     Reset() {
-        this.ctx.clearRect(0,0,this.screenWidth,this.screenHeight);
-        for (let i = 0; i < this.height; i++) {
-            for (let j = 0; j < this.width; j++) {
-                this.matrix[i * this.width + j] = false
-            }
-        }
+        this.ctx.clearRect(0, 0, this.screenWidth, this.screenHeight);
+        this.matrix.clear()
     }
 }
