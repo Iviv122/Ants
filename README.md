@@ -12,7 +12,7 @@ There is no dependecies, this is vanila js,html,css
 - change speed
 - deselect pen
 - spawn ant
-- draw wight lmb, draw black rmb
 - reset board (ants are untouched)
 - reset ants (board is untouched)
 - hard reset (resets everything)
+- Ruleset naming (L - counter clockwise, NON L - clockwise)
