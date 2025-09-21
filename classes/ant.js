@@ -20,11 +20,9 @@ export class Ant {
     }
     Move() {
         if (!!this.display.GetValue(this.posX, this.posY)) {
-
             // counter clockwise
             this.dir = (this.dir - 1 + dirs.length) % dirs.length
         } else {
-
             // clockwise
             this.dir = (this.dir + 1) % dirs.length
         }

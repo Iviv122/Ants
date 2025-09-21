@@ -31,7 +31,6 @@ function Draw() {
         ants.forEach((a) => { a.Move() })
     }
 
-    display.PrintMatrix()
     return setTimeout(() => {
         Draw()
     }, speed);
